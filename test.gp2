@@ -1,0 +1,23 @@
+Main = r1
+
+r1
+(
+	a, b, c : list
+)
+[
+	(n0, a)
+(n1, b)
+	|
+	(e0, n0, n1, c)
+]
+=>
+[
+	(n0, a)
+	(n1, b)
+	|
+	(e0, n0, n1, c)
+	(e1, n0, n0, "A")
+]
+interface = {
+	n0, n1
+}

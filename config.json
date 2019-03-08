@@ -1,0 +1,9 @@
+{
+    "configs": [
+            {
+                "gp2_directory": "C:/cygwin64/usr/local",
+                "working_directory": "C:/cygwin64/tmp/pyGP2",
+                "seeding": "True"
+            }
+        ]
+}
