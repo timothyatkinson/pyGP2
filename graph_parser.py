@@ -28,9 +28,9 @@ def make_graph_parser():
         'MARK_BLUE',
         'MARK_GREY',
         'MARK_DASHED',
+        'ROOT',
         )
     
-    # Tokens
     t_LPAREN  = r'\('
     
     t_RPAREN  = r'\)'
@@ -56,6 +56,9 @@ def make_graph_parser():
     t_MARK_GREY = r'\#grey'
     
     t_MARK_DASHED = r'\#dashed'
+    
+    t_ROOT = r'\(R\)'
+    
     
     def t_NUMBER(t):
         r'\d+'
@@ -87,9 +90,10 @@ def make_graph_parser():
     def t_error(t):
         print("Illegal character '%s'" % t.value[0])
         t.lexer.skip(1)
-        
-    lexer = lex.lex()
      
+    import ply.lex
+    lexer = lex.lex()
+        
     def p_graph(t):
         '''graph : LSQUARE nodelist MID edgelist RSQUARE
                        | LSQUARE nodelist MID RSQUARE
@@ -123,10 +127,20 @@ def make_graph_parser():
             t[0] = [t[1]]
         
     def p_node(t):
-        '''node : LPAREN NUMBER COMMA label mark RPAREN
+        '''node : LPAREN NUMBER ROOT COMMA label mark RPAREN
+                       | LPAREN NUMBER COMMA label mark RPAREN
+                       | LPAREN NUMBER ROOT COMMA label RPAREN
                        | LPAREN NUMBER COMMA label RPAREN'''
-        if len(t) == 7: 
-            t[0] = GP2_Node(label = t[4], mark=t[5])
+        if len(t) == 8:
+            t[0] = GP2_Node(label = t[5], mark=t[6], root=True)
+        elif len(t) == 7: 
+            print("Length 7:")
+            print(t[3])
+            print(t[5])
+            if t[3] == '(R)':
+                t[0] = GP2_Node(label = t[5], root=True)
+            else:
+                t[0] = GP2_Node(label = t[4], mark=t[5])
         else:
             t[0] = GP2_Node(label = t[4])
         t.parser.node_map[int(t[2])] = t[0]
@@ -190,6 +204,7 @@ def make_graph_parser():
         
     def p_error(t):
         print("Syntax error at '%s'" % t.value)
+        print(t.lineno)
     
     
     import ply.yacc as yacc

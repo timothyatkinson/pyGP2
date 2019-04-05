@@ -6,6 +6,7 @@ import subprocess
 from enum import Enum
 import random
 from .graph_parser import make_graph_parser
+import time
 
 def is_windows():
     return (platform.win32_ver())
@@ -109,6 +110,7 @@ class config():
         else:
             proc = subprocess.Popen([cmd, host_path], cwd=program_folder)
         success = proc.wait()
+        time.sleep(0.002)
         return success
     
     def get_result(self, program):
@@ -120,7 +122,7 @@ class config():
             graph_str = f.read()
             f.close()
             self.graph_parser.node_map = {}
-            return self.graph_parser.parse(input=graph_str)
+            return self.graph_parser.parse(input=graph_str.replace(" ", ""))
         
     
 def load_configs():

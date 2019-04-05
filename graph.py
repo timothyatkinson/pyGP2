@@ -301,3 +301,7 @@ class GP2_Graph():
             string += edge.to_string(self) + "\n"
         string += "]\n"
         return string
+    
+    def copy(self):
+        from .program import parse_graph
+        return parse_graph(self.to_string())

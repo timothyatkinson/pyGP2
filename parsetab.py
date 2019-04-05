@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'CHAR COLON COMMA EMPTY LPAREN LSQUARE MARK_BLUE MARK_DASHED MARK_GREEN MARK_GREY MARK_RED MID NUMBER RPAREN RSQUARE STRINGgraph : LSQUARE nodelist MID edgelist RSQUARE\n                       | LSQUARE nodelist MID RSQUARE\n                       | LSQUARE MID RSQUAREnodelist : node nodelist\n                      | nodeedgelist : edge edgelist\n                      | edgenode : LPAREN NUMBER COMMA label mark RPAREN\n                       | LPAREN NUMBER COMMA label RPARENedge : LPAREN NUMBER COMMA NUMBER COMMA NUMBER COMMA label mark RPAREN\n                       | LPAREN NUMBER COMMA NUMBER COMMA NUMBER COMMA label RPARENlabel : atom COLON label\n                      | atom\n                      | EMPTYatom : NUMBER\n                      | STRING\n                      | CHAR mark : MARK_RED\n                      | MARK_GREEN\n                      | MARK_BLUE\n                      | MARK_GREY\n                      | MARK_DASHED'
+_lr_signature = 'CHAR COLON COMMA EMPTY LPAREN LSQUARE MARK_BLUE MARK_DASHED MARK_GREEN MARK_GREY MARK_RED MID NUMBER ROOT RPAREN RSQUARE STRINGgraph : LSQUARE nodelist MID edgelist RSQUARE\n                       | LSQUARE nodelist MID RSQUARE\n                       | LSQUARE MID RSQUAREnodelist : node nodelist\n                      | nodeedgelist : edge edgelist\n                      | edgenode : LPAREN NUMBER ROOT COMMA label mark RPAREN\n                       | LPAREN NUMBER COMMA label mark RPAREN\n                       | LPAREN NUMBER ROOT COMMA label RPAREN\n                       | LPAREN NUMBER COMMA label RPARENedge : LPAREN NUMBER COMMA NUMBER COMMA NUMBER COMMA label mark RPAREN\n                       | LPAREN NUMBER COMMA NUMBER COMMA NUMBER COMMA label RPARENlabel : atom COLON label\n                      | atom\n                      | EMPTYatom : NUMBER\n                      | STRING\n                      | CHAR mark : MARK_RED\n                      | MARK_GREEN\n                      | MARK_BLUE\n                      | MARK_GREY\n                      | MARK_DASHED'
     
-_lr_action_items = {'LSQUARE':([0,],[2,]),'$end':([1,8,12,16,],[0,-3,-2,-1,]),'MID':([2,3,5,9,27,35,],[4,7,-5,-4,-9,-8,]),'LPAREN':([2,5,7,13,27,35,42,43,],[6,6,14,14,-9,-8,-11,-10,]),'RSQUARE':([4,7,11,13,17,42,43,],[8,12,16,-7,-6,-11,-10,]),'NUMBER':([6,14,15,25,33,37,39,],[10,18,19,34,19,38,19,]),'COMMA':([10,18,34,38,],[15,25,37,39,]),'EMPTY':([15,33,39,],[22,22,22,]),'STRING':([15,33,39,],[23,23,23,]),'CHAR':([15,33,39,],[24,24,24,]),'COLON':([19,21,23,24,],[-15,33,-16,-17,]),'RPAREN':([19,20,21,22,23,24,26,28,29,30,31,32,36,40,41,],[-15,27,-13,-14,-16,-17,35,-18,-19,-20,-21,-22,-12,42,43,]),'MARK_RED':([19,20,21,22,23,24,36,40,],[-15,28,-13,-14,-16,-17,-12,28,]),'MARK_GREEN':([19,20,21,22,23,24,36,40,],[-15,29,-13,-14,-16,-17,-12,29,]),'MARK_BLUE':([19,20,21,22,23,24,36,40,],[-15,30,-13,-14,-16,-17,-12,30,]),'MARK_GREY':([19,20,21,22,23,24,36,40,],[-15,31,-13,-14,-16,-17,-12,31,]),'MARK_DASHED':([19,20,21,22,23,24,36,40,],[-15,32,-13,-14,-16,-17,-12,32,]),}
+_lr_action_items = {'LSQUARE':([0,],[2,]),'$end':([1,8,12,17,],[0,-3,-2,-1,]),'MID':([2,3,5,9,30,39,40,43,],[4,7,-5,-4,-11,-10,-9,-8,]),'LPAREN':([2,5,7,13,30,39,40,43,48,49,],[6,6,14,14,-11,-10,-9,-8,-13,-12,]),'RSQUARE':([4,7,11,13,18,48,49,],[8,12,17,-7,-6,-13,-12,]),'NUMBER':([6,14,16,20,27,36,42,45,],[10,19,21,21,37,21,44,21,]),'ROOT':([10,],[15,]),'COMMA':([10,15,19,37,44,],[16,20,27,42,45,]),'EMPTY':([16,20,36,45,],[24,24,24,24,]),'STRING':([16,20,36,45,],[25,25,25,25,]),'CHAR':([16,20,36,45,],[26,26,26,26,]),'COLON':([21,23,25,26,],[-17,36,-18,-19,]),'RPAREN':([21,22,23,24,25,26,28,29,31,32,33,34,35,38,41,46,47,],[-17,30,-15,-16,-18,-19,39,40,-20,-21,-22,-23,-24,43,-14,48,49,]),'MARK_RED':([21,22,23,24,25,26,28,41,46,],[-17,31,-15,-16,-18,-19,31,-14,31,]),'MARK_GREEN':([21,22,23,24,25,26,28,41,46,],[-17,32,-15,-16,-18,-19,32,-14,32,]),'MARK_BLUE':([21,22,23,24,25,26,28,41,46,],[-17,33,-15,-16,-18,-19,33,-14,33,]),'MARK_GREY':([21,22,23,24,25,26,28,41,46,],[-17,34,-15,-16,-18,-19,34,-14,34,]),'MARK_DASHED':([21,22,23,24,25,26,28,41,46,],[-17,35,-15,-16,-18,-19,35,-14,35,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'graph':([0,],[1,]),'nodelist':([2,5,],[3,9,]),'node':([2,5,],[5,5,]),'edgelist':([7,13,],[11,17,]),'edge':([7,13,],[13,13,]),'label':([15,33,39,],[20,36,40,]),'atom':([15,33,39,],[21,21,21,]),'mark':([20,40,],[26,41,]),}
+_lr_goto_items = {'graph':([0,],[1,]),'nodelist':([2,5,],[3,9,]),'node':([2,5,],[5,5,]),'edgelist':([7,13,],[11,18,]),'edge':([7,13,],[13,13,]),'label':([16,20,36,45,],[22,28,41,46,]),'atom':([16,20,36,45,],[23,23,23,23,]),'mark':([22,28,46,],[29,38,47,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,26 +27,28 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> graph","S'",1,None,None,None),
-  ('graph -> LSQUARE nodelist MID edgelist RSQUARE','graph',5,'p_graph','graph_parser.py',94),
-  ('graph -> LSQUARE nodelist MID RSQUARE','graph',4,'p_graph','graph_parser.py',95),
-  ('graph -> LSQUARE MID RSQUARE','graph',3,'p_graph','graph_parser.py',96),
-  ('nodelist -> node nodelist','nodelist',2,'p_nodelist','graph_parser.py',108),
-  ('nodelist -> node','nodelist',1,'p_nodelist','graph_parser.py',109),
-  ('edgelist -> edge edgelist','edgelist',2,'p_edgelist','graph_parser.py',117),
-  ('edgelist -> edge','edgelist',1,'p_edgelist','graph_parser.py',118),
-  ('node -> LPAREN NUMBER COMMA label mark RPAREN','node',6,'p_node','graph_parser.py',126),
-  ('node -> LPAREN NUMBER COMMA label RPAREN','node',5,'p_node','graph_parser.py',127),
-  ('edge -> LPAREN NUMBER COMMA NUMBER COMMA NUMBER COMMA label mark RPAREN','edge',10,'p_edge','graph_parser.py',135),
-  ('edge -> LPAREN NUMBER COMMA NUMBER COMMA NUMBER COMMA label RPAREN','edge',9,'p_edge','graph_parser.py',136),
-  ('label -> atom COLON label','label',3,'p_label','graph_parser.py',145),
-  ('label -> atom','label',1,'p_label','graph_parser.py',146),
-  ('label -> EMPTY','label',1,'p_label','graph_parser.py',147),
-  ('atom -> NUMBER','atom',1,'p_atom','graph_parser.py',158),
-  ('atom -> STRING','atom',1,'p_atom','graph_parser.py',159),
-  ('atom -> CHAR','atom',1,'p_atom','graph_parser.py',160),
-  ('mark -> MARK_RED','mark',1,'p_mark','graph_parser.py',173),
-  ('mark -> MARK_GREEN','mark',1,'p_mark','graph_parser.py',174),
-  ('mark -> MARK_BLUE','mark',1,'p_mark','graph_parser.py',175),
-  ('mark -> MARK_GREY','mark',1,'p_mark','graph_parser.py',176),
-  ('mark -> MARK_DASHED','mark',1,'p_mark','graph_parser.py',177),
+  ('graph -> LSQUARE nodelist MID edgelist RSQUARE','graph',5,'p_graph','graph_parser.py',95),
+  ('graph -> LSQUARE nodelist MID RSQUARE','graph',4,'p_graph','graph_parser.py',96),
+  ('graph -> LSQUARE MID RSQUARE','graph',3,'p_graph','graph_parser.py',97),
+  ('nodelist -> node nodelist','nodelist',2,'p_nodelist','graph_parser.py',109),
+  ('nodelist -> node','nodelist',1,'p_nodelist','graph_parser.py',110),
+  ('edgelist -> edge edgelist','edgelist',2,'p_edgelist','graph_parser.py',118),
+  ('edgelist -> edge','edgelist',1,'p_edgelist','graph_parser.py',119),
+  ('node -> LPAREN NUMBER ROOT COMMA label mark RPAREN','node',7,'p_node','graph_parser.py',127),
+  ('node -> LPAREN NUMBER COMMA label mark RPAREN','node',6,'p_node','graph_parser.py',128),
+  ('node -> LPAREN NUMBER ROOT COMMA label RPAREN','node',6,'p_node','graph_parser.py',129),
+  ('node -> LPAREN NUMBER COMMA label RPAREN','node',5,'p_node','graph_parser.py',130),
+  ('edge -> LPAREN NUMBER COMMA NUMBER COMMA NUMBER COMMA label mark RPAREN','edge',10,'p_edge','graph_parser.py',146),
+  ('edge -> LPAREN NUMBER COMMA NUMBER COMMA NUMBER COMMA label RPAREN','edge',9,'p_edge','graph_parser.py',147),
+  ('label -> atom COLON label','label',3,'p_label','graph_parser.py',156),
+  ('label -> atom','label',1,'p_label','graph_parser.py',157),
+  ('label -> EMPTY','label',1,'p_label','graph_parser.py',158),
+  ('atom -> NUMBER','atom',1,'p_atom','graph_parser.py',169),
+  ('atom -> STRING','atom',1,'p_atom','graph_parser.py',170),
+  ('atom -> CHAR','atom',1,'p_atom','graph_parser.py',171),
+  ('mark -> MARK_RED','mark',1,'p_mark','graph_parser.py',184),
+  ('mark -> MARK_GREEN','mark',1,'p_mark','graph_parser.py',185),
+  ('mark -> MARK_BLUE','mark',1,'p_mark','graph_parser.py',186),
+  ('mark -> MARK_GREY','mark',1,'p_mark','graph_parser.py',187),
+  ('mark -> MARK_DASHED','mark',1,'p_mark','graph_parser.py',188),
 ]

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from program import GP2_Program, parse_graph
+from pyGP2.program import GP2_Program, parse_graph
 
 program = GP2_Program("test2", program_code='''Main = r1
 
